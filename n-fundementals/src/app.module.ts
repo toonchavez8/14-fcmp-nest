@@ -10,32 +10,38 @@ import { SongsModule } from '@/songs/songs.module';
 import { LoggerMiddleware } from '@/common/middleware/logger.middleware';
 import { DevConfigService } from '@/common/providers/DevConfigService';
 
+// Defining configuration objects for different environments these are used by the factory function however not really used in the application other than for the purpose of demonstration
 const devConfig = { port: 3000 };
 const prodConfig = { port: 4000 };
-
 @Module({
-	imports: [SongsModule],
-	controllers: [AppController],
+	imports: [SongsModule], // Importing the SongsModule to include its features in the application
+	controllers: [AppController], // Declaring the main application controller
 	providers: [
-		AppService,
+		AppService, // Registering the AppService as a provider for the application
 		{
-			provide: DevConfigService,
-			useClass: DevConfigService,
+			provide: DevConfigService, // Defining a custom provider for DevConfigService
+			useClass: DevConfigService, // Specifies that the DevConfigService class should be used
 		},
 		{
-			provide: 'Config',
+			provide: 'Config', // Defining a provider identified by the token 'Config'
 			useFactory: () => {
-				return process.env.NODE_ENV === 'production'
-					? prodConfig
-					: devConfig;
+				// Using a factory function to decide which configuration to use based on the environment
+				return process.env.NODE_ENV === 'production' // Checking if the environment is production
+					? prodConfig // Use production configuration if the environment is production
+					: devConfig; // Use development configuration otherwise
 			},
 		},
 	],
 })
 export class AppModule implements NestModule {
+	/**
+	 * Configures middleware for the application.
+	 * The LoggerMiddleware is applied to handle requests to the 'songs' route with the POST method.
+	 * @param consumer - MiddlewareConsumer to manage middleware application
+	 */
 	configure(consumer: MiddlewareConsumer) {
 		consumer
-			.apply(LoggerMiddleware)
-			.forRoutes({ path: 'songs', method: RequestMethod.POST });
+			.apply(LoggerMiddleware) // Applying the LoggerMiddleware
+			.forRoutes({ path: 'songs', method: RequestMethod.POST }); // Specifies the route and method for the middleware
 	}
 }

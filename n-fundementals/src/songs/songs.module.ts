@@ -4,15 +4,19 @@ import { SongsService } from '@/songs/songs.service';
 import { Connection } from '@/common/constants/Connection';
 
 @Module({
+	// Defines the controllers for this module
 	controllers: [SongsController],
+	// Defines the providers (services or constants) that will be available in this module
 	providers: [
 		{
+			// Registers the SongsService with the DI system
 			provide: SongsService,
-			useClass: SongsService,
+			useClass: SongsService, // Specifies that `SongsService` should be instantiated as its own class
 		},
 		{
+			// Registers the 'Connection' constant with the DI system
 			provide: 'Connection',
-			useValue: Connection,
+			useValue: Connection, // Specifies the value to inject wherever 'Connection' is used
 		},
 	],
 })

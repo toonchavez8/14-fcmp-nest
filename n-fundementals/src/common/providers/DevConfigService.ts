@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-@Injectable()
+@Injectable() // Marks this class as a provider that can be injected into other parts of the application
 export class DevConfigService {
 	// Property to store the database host
 	DBHOST = 'localhost';
