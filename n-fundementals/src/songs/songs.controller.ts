@@ -13,15 +13,15 @@ import {
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDto } from './dto/create-song-dto';
-import { CONNECTION, ConnectionType } from 'src/common/constants/connection';
+import { Connection } from 'src/common/constants/Connection';
 
 @Controller('songs') // Defines the base route for this controller
 export class SongsController {
 	constructor(
 		private songsService: SongsService,
-		@Inject('CONNECTION') private CONNECTION: ConnectionType,
+		@Inject('Connection') private readonly Connection: Connection,
 	) {
-		console.log(this.CONNECTION);
+		console.log(this.Connection);
 	}
 
 	/**

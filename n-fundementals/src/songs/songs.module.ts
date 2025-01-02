@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SongsController } from './songs.controller';
 import { SongsService } from './songs.service';
-import { CONNECTION } from 'src/common/constants/connection';
+import { Connection } from 'src/common/constants/connection';
 
 @Module({
 	controllers: [SongsController],
@@ -11,8 +11,8 @@ import { CONNECTION } from 'src/common/constants/connection';
 			useClass: SongsService,
 		},
 		{
-			provide: 'CONNECTION',
-			useValue: CONNECTION,
+			provide: 'Connection',
+			useValue: Connection,
 		},
 	],
 })
