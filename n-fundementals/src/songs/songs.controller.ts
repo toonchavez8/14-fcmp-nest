@@ -18,7 +18,7 @@ import { Connection } from '@/common/constants/Connection';
 @Controller('songs') // Defines the base route for this controller
 export class SongsController {
 	constructor(
-		private songsService: SongsService,
+		private readonly songsService: SongsService,
 		@Inject('Connection') private readonly Connection: Connection,
 	) {
 		console.log(this.Connection);
