@@ -5,6 +5,7 @@ import {
 	Get,
 	HttpException,
 	HttpStatus,
+	Inject,
 	Param,
 	ParseFloatPipe,
 	Post,
@@ -12,10 +13,16 @@ import {
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDto } from './dto/create-song-dto';
+import { CONNECTION, ConnectionType } from 'src/common/constants/connection';
 
 @Controller('songs') // Defines the base route for this controller
 export class SongsController {
-	constructor(private songsService: SongsService) {}
+	constructor(
+		private songsService: SongsService,
+		@Inject('CONNECTION') private CONNECTION: ConnectionType,
+	) {
+		console.log(this.CONNECTION);
+	}
 
 	/**
 	 * Create a new song.
