@@ -4,12 +4,22 @@ GET http://localhost:3000/
 ### Get local songs
 GET http://localhost:3000/songs
 
-### Get local song by id
-GET http://localhost:3000/songs/1
-
 ### Create local song
 POST http://localhost:3000/songs
 Content-Type: application/json
+
+{
+  "title": "new song",
+  "artists": ["new artist"],
+  "album": "new album",
+  "releaseDate": "2023-01-01",
+  "genre": "new genre",
+  "duration": "02:21"
+}
+
+### Get local song by id
+GET http://localhost:3000/songs/1
+
 
 {
   "title": "new song",
