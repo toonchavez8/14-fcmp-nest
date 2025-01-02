@@ -13,6 +13,7 @@ export class SongsService {
 
 	findAll() {
 		//Find all songs
-		return this.songs;
+		throw new Error('Not implemented');
+		//return this.songs;
 	}
 }
