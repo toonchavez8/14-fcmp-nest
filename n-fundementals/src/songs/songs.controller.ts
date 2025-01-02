@@ -11,9 +11,9 @@ import {
 	Post,
 	Put,
 } from '@nestjs/common';
-import { SongsService } from './songs.service';
-import { CreateSongDto } from './dto/create-song-dto';
-import { Connection } from 'src/common/constants/Connection';
+import { SongsService } from '@/songs/songs.service';
+import { CreateSongDto } from '@/songs/dto/create-song-dto';
+import { Connection } from '@/common/constants/Connection';
 
 @Controller('songs') // Defines the base route for this controller
 export class SongsController {

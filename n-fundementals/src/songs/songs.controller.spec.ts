@@ -1,5 +1,5 @@
+import { SongsController } from '@/songs/songs.controller';
 import { Test, TestingModule } from '@nestjs/testing';
-import { SongsController } from './songs.controller';
 
 describe('SongsController', () => {
 	let controller: SongsController;

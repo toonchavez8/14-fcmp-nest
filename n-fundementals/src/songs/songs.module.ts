@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { SongsController } from './songs.controller';
-import { SongsService } from './songs.service';
-import { Connection } from 'src/common/constants/connection';
+import { SongsController } from '@/songs/songs.controller';
+import { SongsService } from '@/songs/songs.service';
+import { Connection } from '@/common/constants/Connection';
 
 @Module({
 	controllers: [SongsController],

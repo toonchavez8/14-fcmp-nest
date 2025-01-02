@@ -6,6 +6,14 @@ module.exports = {
 		sourceType: 'module',
 	},
 	plugins: ['@typescript-eslint/eslint-plugin'],
+	settings: {
+		'import/resolver': {
+			typescript: {
+				alwaysTryTypes: true,
+				project: './tsconfig.json',
+			},
+		},
+	},
 	extends: [
 		'plugin:@typescript-eslint/recommended',
 		'plugin:prettier/recommended',
