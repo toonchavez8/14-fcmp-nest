@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SongsController } from '@/songs/songs.controller';
 import { SongsService } from '@/songs/songs.service';
-import { Connection } from '@/common/constants/Connection';
+import { createConnection } from '@/common/constants/Connection';
 
 @Module({
 	// Defines the controllers for this module
@@ -16,7 +16,7 @@ import { Connection } from '@/common/constants/Connection';
 		{
 			// Registers the 'Connection' constant with the DI system
 			provide: 'Connection',
-			useValue: Connection, // Specifies the value to inject wherever 'Connection' is used
+			useValue: createConnection, // Specifies the value to inject wherever 'Connection' is used
 		},
 	],
 })

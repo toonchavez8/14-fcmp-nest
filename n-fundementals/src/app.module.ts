@@ -1,3 +1,4 @@
+import { ConfigModule } from '@nestjs/config';
 import {
 	MiddlewareConsumer,
 	Module,
@@ -9,12 +10,29 @@ import { AppService } from '@/app.service';
 import { SongsModule } from '@/songs/songs.module';
 import { LoggerMiddleware } from '@/common/middleware/logger.middleware';
 import { DevConfigService } from '@/common/providers/DevConfigService';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { DataSource } from 'typeorm';
 
 // Defining configuration objects for different environments these are used by the factory function however not really used in the application other than for the purpose of demonstration
 const devConfig = { port: 3000 };
 const prodConfig = { port: 4000 };
 @Module({
-	imports: [SongsModule], // Importing the SongsModule to include its features in the application
+	imports: [
+		ConfigModule.forRoot({
+			isGlobal: true, // Makes ConfigModule available globally
+		}),
+		TypeOrmModule.forRoot({
+			type: 'postgres',
+			host: process.env.DB_HOST,
+			database: process.env.DB_NAME,
+			port: Number(process.env.DB_PORT),
+			username: process.env.DB_USER,
+			password: process.env.DB_PASS,
+			entities: [],
+			synchronize: true,
+		}),
+		SongsModule,
+	], // Importing the SongsModule to include its features in the application and the TypeOrmModule to configure the database connection
 	controllers: [AppController], // Declaring the main application controller
 	providers: [
 		AppService, // Registering the AppService as a provider for the application
@@ -34,6 +52,9 @@ const prodConfig = { port: 4000 };
 	],
 })
 export class AppModule implements NestModule {
+	constructor(private readonly dataSource: DataSource) {
+		console.log('dataSource', dataSource.driver.database);
+	}
 	/**
 	 * Configures middleware for the application.
 	 * The LoggerMiddleware is applied to handle requests to the 'songs' route with the POST method.
