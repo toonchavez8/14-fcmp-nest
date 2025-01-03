@@ -1,4 +1,4 @@
-import { Song } from '@/songs/song.entity';
+import { SongEntity } from '@/songs/song.entity';
 import { ConfigModule } from '@nestjs/config';
 import {
 	MiddlewareConsumer,
@@ -29,7 +29,7 @@ const prodConfig = { port: 4000 };
 			port: Number(process.env.DB_PORT),
 			username: process.env.DB_USER,
 			password: process.env.DB_PASS,
-			entities: [Song],
+			entities: [SongEntity],
 			synchronize: true,
 		}),
 		SongsModule,

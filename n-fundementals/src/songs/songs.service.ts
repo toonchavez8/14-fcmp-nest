@@ -1,7 +1,16 @@
 import { Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { SongEntity } from '@/songs/song.entity';
+import { CreateSongDto } from '@/songs/dto/create-song-dto';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class SongsService {
+	constructor(
+		// Injecting the Song repository to use its methods for database operations without it the serivece will break and throw an error
+		@InjectRepository(SongEntity)
+		private readonly songsRepository: Repository<SongEntity>,
+	) {}
 	// Local in-memory database: An array to store songs
 	private readonly songs = [];
 
@@ -10,10 +19,17 @@ export class SongsService {
 	 * @param song - The song object to add.
 	 * @returns The updated list of songs after the new song is added.
 	 */
-	create(song) {
-		// Add the song to the in-memory array
-		this.songs.push(song);
-		return this.songs; // Return the updated list of songs
+	async create(songDto: CreateSongDto): Promise<SongEntity> {
+		const song = new SongEntity();
+		song.title = songDto.title;
+		song.artists = songDto.artists;
+		song.album = songDto.album;
+		song.releaseDate = songDto.releaseDate;
+		song.genre = songDto.genre;
+		song.duration = songDto.duration;
+		song.lyrics = songDto.lyrics;
+
+		return await this.songsRepository.save(song);
 	}
 
 	/**

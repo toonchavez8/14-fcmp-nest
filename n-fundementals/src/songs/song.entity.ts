@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('songs')
-export class Song {
+export class SongEntity {
 	@PrimaryGeneratedColumn('uuid') // Generates a unique identifier for each song
 	id: string;
 
@@ -20,9 +20,9 @@ export class Song {
 	@Column({ type: 'varchar', length: 255, nullable: true }) // Genre is optional
 	genre: string;
 
-	@Column({ type: 'time' }) // Stores duration as time in HH:mm:ss format
-	duration: string;
+	@Column({ type: 'time', nullable: true }) // 'time' type for durations
+	duration: Date;
 
-	@Column({ type: 'text', nullable: true }) // Lyrics are optional
+	@Column({ type: 'text', nullable: true }) // Lyrics are optional and can be stored as text
 	lyrics: string;
 }
