@@ -1,9 +1,10 @@
+import { Pagination } from 'nestjs-typeorm-paginate';
 import {
 	Body,
 	Controller,
+	DefaultValuePipe,
 	Delete,
 	Get,
-	HttpException,
 	HttpStatus,
 	Inject,
 	Param,
@@ -11,6 +12,7 @@ import {
 	ParseIntPipe,
 	Post,
 	Put,
+	Query,
 } from '@nestjs/common';
 import { SongsService } from '@/songs/songs.service';
 import { CreateSongDto } from '@/songs/dto/create-song-dto';
@@ -42,19 +44,17 @@ export class SongsController {
 	 * Handles server errors gracefully.
 	 */
 	@Get()
-	findAll() {
-		try {
-			return this.songsService.findAll(); // Delegate to the service
-		} catch (error) {
-			// Throwing an exception if fetching songs fails
-			throw new HttpException(
-				"server error, can't find songs",
-				HttpStatus.INTERNAL_SERVER_ERROR,
-				{ cause: error },
-			);
-		}
+	findAll(
+		@Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+		@Query('limit', new DefaultValuePipe(10), ParseIntPipe)
+		limit: number = 10,
+	): Promise<Pagination<SongEntity>> {
+		limit = limit > 100 ? 100 : limit; // Limits the number of songs returned to 100
+		return this.songsService.paginate({
+			page,
+			limit,
+		});
 	}
-
 	/**
 	 * Retrieve a song by its ID.
 	 * @param id - The ID of the song (validated as a float).
