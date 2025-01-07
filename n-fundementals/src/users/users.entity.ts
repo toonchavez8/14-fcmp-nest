@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { PlaylistEntity } from '@/playlists/playlists.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
 export class UserEntity {
@@ -22,4 +23,7 @@ export class UserEntity {
 
 	@Column({ type: 'varchar', length: 255, nullable: true }) // Bio is optional
 	bio: string;
+
+	@OneToMany(() => PlaylistEntity, (playlist) => playlist.user)
+	playlists: PlaylistEntity[];
 }

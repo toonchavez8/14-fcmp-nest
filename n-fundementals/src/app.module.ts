@@ -15,6 +15,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { UserEntity } from './users/users.entity';
 import { ArtistEntity } from './artists/artists.entity';
+import { PlaylistEntity } from './playlists/playlists.entity';
+import { PlaylistsModule } from './playlists/playlists.module';
 
 // Defining configuration objects for different environments these are used by the factory function however not really used in the application other than for the purpose of demonstration
 const devConfig = { port: 3000 };
@@ -31,10 +33,11 @@ const prodConfig = { port: 4000 };
 			port: Number(process.env.DB_PORT),
 			username: process.env.DB_USER,
 			password: process.env.DB_PASS,
-			entities: [UserEntity, ArtistEntity, SongEntity],
+			entities: [UserEntity, ArtistEntity, SongEntity, PlaylistEntity],
 			synchronize: true,
 		}),
 		SongsModule,
+		PlaylistsModule,
 	], // Importing the SongsModule to include its features in the application and the TypeOrmModule to configure the database connection
 	controllers: [AppController], // Declaring the main application controller
 	providers: [
