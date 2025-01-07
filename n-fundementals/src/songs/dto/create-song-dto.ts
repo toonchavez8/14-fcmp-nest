@@ -5,6 +5,7 @@ import {
 	IsString,
 	IsOptional,
 	IsMilitaryTime,
+	IsNumber,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -15,8 +16,8 @@ export class CreateSongDto {
 
 	@IsNotEmpty()
 	@IsArray()
-	@IsString({ each: true }) // Ensures each element in the array is a string
-	readonly artists: string[];
+	@IsNumber({}, { each: true }) // Ensures each element in the array is a number
+	readonly artists;
 
 	@IsString()
 	@IsOptional() // Album might not be required

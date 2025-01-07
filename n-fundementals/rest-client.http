@@ -12,10 +12,10 @@ POST http://localhost:3000/songs
 Content-Type: application/json
 
 {
-  "title": " blue new",
-  "artists": ["Yui Aragaki"],
-  "album": "Hakuna Matata",
-  "releaseDate": "2023-01-01",
+  "title": "Pac Man",
+  "artists": [3,4],
+  "album": "Rich Mafia",
+  "releaseDate": "2024-10-25",
   "genre": "Pop",
   "duration": "02:00"
 }

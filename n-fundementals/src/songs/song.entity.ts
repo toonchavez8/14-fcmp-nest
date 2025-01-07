@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { ArtistEntity } from '@/artists/artists.entity';
+import {
+	Entity,
+	Column,
+	PrimaryGeneratedColumn,
+	ManyToMany,
+	JoinTable,
+} from 'typeorm';
 
 @Entity('songs')
 export class SongEntity {
@@ -7,9 +14,6 @@ export class SongEntity {
 
 	@Column({ type: 'varchar', length: 255 })
 	title: string;
-
-	@Column('varchar', { array: true, length: 255 })
-	artists: string[];
 
 	@Column({ type: 'varchar', length: 255, nullable: true }) // Album is optional
 	album: string;
@@ -25,4 +29,8 @@ export class SongEntity {
 
 	@Column({ type: 'text', nullable: true }) // Lyrics are optional and can be stored as text
 	lyrics: string;
+
+	@ManyToMany(() => ArtistEntity, (artist) => artist.songs, { cascade: true })
+	@JoinTable({ name: 'songs_artists' })
+	artists: ArtistEntity[];
 }

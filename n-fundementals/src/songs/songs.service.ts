@@ -9,6 +9,7 @@ import {
 	paginate,
 	IPaginationOptions,
 } from 'nestjs-typeorm-paginate';
+import { ArtistEntity } from '@/artists/artists.entity';
 
 @Injectable()
 export class SongsService {
@@ -16,6 +17,8 @@ export class SongsService {
 		// Injecting the Song repository to use its methods for database operations without it the serivece will break and throw an error
 		@InjectRepository(SongEntity)
 		private readonly songsRepository: Repository<SongEntity>,
+		@InjectRepository(ArtistEntity)
+		private readonly artistsRepository: Repository<ArtistEntity>,
 	) {}
 
 	/**
@@ -28,7 +31,21 @@ export class SongsService {
 	 */
 	async create(songDto: CreateSongDto): Promise<SongEntity> {
 		const song = new SongEntity();
-		Object.assign(song, songDto);
+
+		song.title = songDto.title;
+
+		song.album = songDto.album;
+		song.releaseDate = songDto.releaseDate;
+		song.genre = songDto.genre;
+		song.duration = songDto.duration;
+		song.lyrics = songDto.lyrics;
+		//Find all the artists based on ids
+
+		const artists = await this.artistsRepository.findBy(songDto.artists);
+
+		// set the relationship between artists and songs
+		song.artists = artists;
+
 		return await this.songsRepository.save(song);
 	}
 
