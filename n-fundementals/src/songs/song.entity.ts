@@ -36,6 +36,8 @@ export class SongEntity {
 	@JoinTable({ name: 'songs_artists' })
 	artists: ArtistEntity[];
 
-	@ManyToOne(() => PlaylistEntity, (playlist) => playlist.songs)
+	@ManyToOne(() => PlaylistEntity, (playlist) => playlist.songs, {
+		cascade: true,
+	})
 	playlist: PlaylistEntity;
 }

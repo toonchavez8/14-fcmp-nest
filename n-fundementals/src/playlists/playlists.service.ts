@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PlaylistEntity } from '@/playlists/playlists.entity';
 import { SongEntity } from '@/songs/song.entity';
 import { UserEntity } from '@/users/users.entity';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { CreatePlaylistDto } from './dto/create-playlist-dto';
 
 @Injectable()
@@ -36,7 +36,10 @@ export class PlaylistsService {
 		}
 
 		// Find songs by their IDs
-		const songs = await this.songsRepository.findByIds(playlistDto.songs);
+
+		const songs = await this.songsRepository.findBy({
+			id: In(playlistDto.songs),
+		});
 
 		playlist.songs = songs;
 		return await this.playlistsRepository.save(playlist);
