@@ -20,22 +20,16 @@ Content-Type: application/json
 
 
 ### Get local song by id
-GET http://localhost:3000/songs/1
+GET http://localhost:3000/songs/2
 
-
-{
-  "title": "new song",
-  "artist": "new artist"
-}
 
 ### Update local song by id
-PUT http://localhost:3000/songs/1
+PUT http://localhost:3000/songs/2
 Content-Type: application/json
 
 {
-  "title": "new song",
-  "artist": "new artist"
+  "title": "Let it go "
 }
 
 ### Delete local song by id
-DELETE http://localhost:3000/songs/1    
+DELETE http://localhost:3000/songs/1

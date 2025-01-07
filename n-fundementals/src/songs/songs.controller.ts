@@ -8,12 +8,16 @@ import {
 	Inject,
 	Param,
 	ParseFloatPipe,
+	ParseIntPipe,
 	Post,
 	Put,
 } from '@nestjs/common';
 import { SongsService } from '@/songs/songs.service';
 import { CreateSongDto } from '@/songs/dto/create-song-dto';
 import { Connection } from '@/common/constants/Connection';
+import { SongEntity } from './song.entity';
+import { DeleteResult } from 'typeorm';
+import { UpdateSongDto } from './dto/update-song-dto';
 
 @Controller('songs') // Defines the base route for this controller
 export class SongsController {
@@ -64,8 +68,8 @@ export class SongsController {
 			}),
 		)
 		id: number,
-	) {
-		return `fetch song by id ${typeof id}`; // Returning a string for now
+	): Promise<SongEntity> {
+		return this.songsService.findOne(id); // Delegate to the service
 	}
 
 	/**
@@ -73,8 +77,11 @@ export class SongsController {
 	 * (Currently returns a placeholder string for testing.)
 	 */
 	@Put(':id')
-	updateOne(@Param('id') id: number) {
-		return `update song by id ${id}`;
+	updateOne(
+		@Param('id', ParseIntPipe) id: number,
+		@Body() UpdateSongDto: UpdateSongDto,
+	) {
+		return this.songsService.updateOne(id, UpdateSongDto); // Delegate to the service
 	}
 
 	/**
@@ -82,7 +89,7 @@ export class SongsController {
 	 * (Currently returns a placeholder string for testing.)
 	 */
 	@Delete(':id')
-	deleteOne(@Param('id') id: number) {
-		return `delete song by id ${id}`;
+	deleteOne(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {
+		return this.songsService.deleteOne(id); // Delegate to the service
 	}
 }

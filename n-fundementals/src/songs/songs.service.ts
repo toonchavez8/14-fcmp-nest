@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { SongEntity } from '@/songs/song.entity';
 import { CreateSongDto } from '@/songs/dto/create-song-dto';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UpdateSongDto } from './dto/update-song-dto';
 
 @Injectable()
 export class SongsService {
@@ -11,24 +12,18 @@ export class SongsService {
 		@InjectRepository(SongEntity)
 		private readonly songsRepository: Repository<SongEntity>,
 	) {}
-	// Local in-memory database: An array to store songs
-	private readonly songs = [];
 
 	/**
 	 * Create a new song and add it to the local database.
 	 * @param song - The song object to add.
 	 * @returns The updated list of songs after the new song is added.
 	 */
+	/**
+	 * Create a new song and add it to the local database.
+	 */
 	async create(songDto: CreateSongDto): Promise<SongEntity> {
 		const song = new SongEntity();
-		song.title = songDto.title;
-		song.artists = songDto.artists;
-		song.album = songDto.album;
-		song.releaseDate = songDto.releaseDate;
-		song.genre = songDto.genre;
-		song.duration = songDto.duration;
-		song.lyrics = songDto.lyrics;
-
+		Object.assign(song, songDto);
 		return await this.songsRepository.save(song);
 	}
 
@@ -38,6 +33,24 @@ export class SongsService {
 	 */
 	findAll() {
 		// Return the current list of songs
-		return this.songs;
+		return this.songsRepository.find();
+	}
+
+	findOne(id: number): Promise<SongEntity> {
+		// Return the song with the specified ID
+		return this.songsRepository.findOneBy({ id });
+	}
+
+	updateOne(
+		id: number,
+		recordToUpdate: UpdateSongDto,
+	): Promise<UpdateResult> {
+		// Update the song with the specified ID
+		return this.songsRepository.update({ id }, recordToUpdate);
+	}
+
+	deleteOne(id: number): Promise<DeleteResult> {
+		// Delete the song with the specified ID
+		return this.songsRepository.delete({ id });
 	}
 }

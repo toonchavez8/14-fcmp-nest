@@ -2,8 +2,8 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('songs')
 export class SongEntity {
-	@PrimaryGeneratedColumn('uuid') // Generates a unique identifier for each song
-	id: string;
+	@PrimaryGeneratedColumn() // Generates a unique identifier for each song
+	id: number;
 
 	@Column({ type: 'varchar', length: 255 })
 	title: string;
