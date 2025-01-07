@@ -36,7 +36,7 @@ export class PlaylistsService {
 		}
 
 		// Find songs by their IDs
-		const songs = await this.songsRepository.findBy(playlistDto.songs);
+		const songs = await this.songsRepository.findByIds(playlistDto.songs);
 
 		playlist.songs = songs;
 		return await this.playlistsRepository.save(playlist);

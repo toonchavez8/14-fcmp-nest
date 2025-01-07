@@ -41,9 +41,7 @@ export class SongsService {
 		song.lyrics = songDto.lyrics;
 		//Find all the artists based on ids
 
-		const artists = await this.artistsRepository.findBy(songDto.artists);
-
-		// set the relationship between artists and songs
+		const artists = await this.artistsRepository.findByIds(songDto.artists);
 		song.artists = artists;
 
 		return await this.songsRepository.save(song);

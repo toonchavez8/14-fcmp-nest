@@ -12,8 +12,8 @@ POST http://localhost:3000/songs
 Content-Type: application/json
 
 {
-  "title": "Pac Man",
-  "artists": [3,4],
+  "title": "Rap'",
+  "artists": [3,2],
   "album": "Rich Mafia",
   "releaseDate": "2024-10-25",
   "genre": "Pop",
@@ -35,3 +35,15 @@ Content-Type: application/json
 
 ### Delete local song by id
 DELETE http://localhost:3000/songs/1
+
+
+### Create local playlist
+POST http://localhost:3000/playlists
+Content-Type: application/json
+
+{
+  "name": "My favorite songs",
+  "description": "A playlist of my favorite songs",
+  "songs": [3,23],
+  "user": 1
+}
