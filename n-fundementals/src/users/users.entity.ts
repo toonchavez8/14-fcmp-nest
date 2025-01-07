@@ -1,12 +1,25 @@
-// import { Song } from '@/songs/entities/song.entity';
-// import { User } from '@/users/entities/user.entity';
-import {
-	Column,
-	Entity,
-	ManyToOne,
-	OneToMany,
-	PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('playlists')
-export class Playlist {}
+@Entity('users')
+export class UserEntity {
+	@PrimaryGeneratedColumn()
+	id: number;
+
+	@Column()
+	username: string;
+
+	@Column()
+	firstName: string;
+
+	@Column()
+	lastName: string;
+
+	@Column()
+	email: string;
+
+	@Column({ type: 'varchar', length: 255, nullable: true }) // Password is optional
+	password: string;
+
+	@Column({ type: 'varchar', length: 255, nullable: true }) // Bio is optional
+	bio: string;
+}
