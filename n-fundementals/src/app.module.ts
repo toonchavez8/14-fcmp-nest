@@ -17,6 +17,9 @@ import { UserEntity } from './users/users.entity';
 import { ArtistEntity } from './artists/artists.entity';
 import { PlaylistEntity } from './playlists/playlists.entity';
 import { PlaylistsModule } from './playlists/playlists.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { UsersModule } from './users/users.module';
 
 // Defining configuration objects for different environments these are used by the factory function however not really used in the application other than for the purpose of demonstration
 const devConfig = { port: 3000 };
@@ -38,6 +41,9 @@ const prodConfig = { port: 4000 };
 		}),
 		SongsModule,
 		PlaylistsModule,
+		AuthModule,
+		UserModule,
+		UsersModule,
 	], // Importing the SongsModule to include its features in the application and the TypeOrmModule to configure the database connection
 	controllers: [AppController], // Declaring the main application controller
 	providers: [
