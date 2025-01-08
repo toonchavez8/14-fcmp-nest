@@ -47,3 +47,15 @@ Content-Type: application/json
   "songs": [3,23],
   "user": 1
 }
+
+### Sign up
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+  "username": "toonchavez",
+  "firstName": "Miguel",
+  "email": "toonchavez@gmail.com",
+  "password": "123456",
+  "bio": "Test user"
+}

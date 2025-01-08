@@ -1,6 +1,5 @@
 import { PlaylistEntity } from '@/playlists/playlists.entity';
 import { Exclude } from 'class-transformer';
-import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
@@ -14,11 +13,10 @@ export class UserEntity {
 	@Column()
 	firstName: string;
 
-	@Column()
+	@Column({ type: 'varchar', length: 255, nullable: true })
 	lastName: string;
 
 	@Column({ type: 'varchar', length: 255, unique: true })
-	@IsNotEmpty()
 	email: string;
 
 	@Column({ type: 'varchar', length: 255, nullable: true }) // Password is optional
