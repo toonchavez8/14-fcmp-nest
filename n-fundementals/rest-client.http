@@ -67,3 +67,9 @@ Content-Type: application/json
   "email": "toonchavez@gmail.com",
   "password": "123456"
 }
+
+## Access TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvb25jaGF2ZXpAZ21haWwuY29tIiwic3ViIjoyLCJpYXQiOjE3MzY0NjQ3NjgsImV4cCI6MTczNjU1MTE2OH0.-V2abLzXU_8LhydQ9jnnabNbZsZme2f_70sd4GBN3kM"
+
+### Get Profile
+GET http://localhost:3000/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvb25jaGF2ZXpAZ21haWwuY29tIiwic3ViIjoyLCJpYXQiOjE3MzY0NjQ3NjgsImV4cCI6MTczNjU1MTE2OH0.-V2abLzXU_8LhydQ9jnnabNbZsZme2f_70sd4GBN3kM
