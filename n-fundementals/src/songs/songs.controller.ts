@@ -13,6 +13,8 @@ import {
 	Post,
 	Put,
 	Query,
+	Request,
+	UseGuards,
 } from '@nestjs/common';
 import { SongsService } from '@/songs/songs.service';
 import { CreateSongDto } from '@/songs/dto/create-song-dto';
@@ -20,6 +22,7 @@ import { Connection } from '@/common/constants/Connection';
 import { SongEntity } from './song.entity';
 import { DeleteResult } from 'typeorm';
 import { UpdateSongDto } from './dto/update-song-dto';
+import { ArtistsJwtGuard } from '@/auth/artists-jwt-garud';
 
 @Controller('songs') // Defines the base route for this controller
 export class SongsController {
@@ -35,7 +38,9 @@ export class SongsController {
 	 * @param CreateSongDto - The song data to be created.
 	 */
 	@Post()
-	create(@Body() CreateSongDto: CreateSongDto) {
+	@UseGuards(ArtistsJwtGuard)
+	create(@Body() CreateSongDto: CreateSongDto, @Request() request) {
+		console.log(request.user);
 		return this.songsService.create(CreateSongDto); // Delegate to the service
 	}
 

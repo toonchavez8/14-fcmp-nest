@@ -5,6 +5,7 @@ import { UsersModule } from '@/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { authConstants } from './auth.constants';
 import { JwtStrategy } from '@/auth/jwt-strategry';
+import { ArtistsModule } from '@/artists/artists.module';
 
 @Module({
 	imports: [
@@ -13,6 +14,7 @@ import { JwtStrategy } from '@/auth/jwt-strategry';
 			secret: authConstants.JWT_SECRET,
 			signOptions: { expiresIn: '1d' },
 		}),
+		ArtistsModule,
 	],
 	providers: [AuthService, JwtStrategy],
 	controllers: [AuthController],

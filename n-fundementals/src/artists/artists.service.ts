@@ -11,6 +11,6 @@ export class ArtistsService {
 	) {}
 
 	findArtist(userId: number): Promise<ArtistEntity> {
-		return this.artistsRepository.findOne({ where: { id: userId } });
+		return this.artistsRepository.findOneBy({ id: userId });
 	}
 }

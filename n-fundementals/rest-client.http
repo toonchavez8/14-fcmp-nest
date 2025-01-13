@@ -10,10 +10,11 @@ GET http://localhost:3000/songs?page=1&limit=2
 ### Create local song
 POST http://localhost:3000/songs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IlJpY2hAdmFnb3MuY29tIiwidXNlcklkIjo0LCJpYXQiOjE3MzY4MTAzMDksImV4cCI6MTczNjg5NjcwOX0.3PwZ29NKxybodpFfi7bXW3tmY1zZbRU9-LtchJYDNII
 
 {
   "title": "Rap'",
-  "artists": [3,2],
+  "artists": [1],
   "album": "Rich Mafia",
   "releaseDate": "2024-10-25",
   "genre": "Pop",
@@ -59,6 +60,19 @@ Content-Type: application/json
   "password": "123456",
   "bio": "Test user"
 }
+
+
+### Sign up new Artist
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+  "username": "GeraMx",
+  "firstName": "Gera",
+  "email": "Rich@vagos.com",
+  "password": "123456",
+  "bio": "Test user"
+}
 ### Login User
 POST http://localhost:3000/auth/login
 Content-Type: application/json
@@ -68,8 +82,17 @@ Content-Type: application/json
   "password": "123456"
 }
 
-## Access TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvb25jaGF2ZXpAZ21haWwuY29tIiwic3ViIjoyLCJpYXQiOjE3MzY0NjQ3NjgsImV4cCI6MTczNjU1MTE2OH0.-V2abLzXU_8LhydQ9jnnabNbZsZme2f_70sd4GBN3kM"
+### Login Artist  
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "Rich@vagos.com",
+  "password": "123456"
+}
+
+## Access TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvb25jaGF2ZXpAZ21haWwuY29tIiwidXNlcklkIjoyLCJpYXQiOjE3MzY4MTAyODcsImV4cCI6MTczNjg5NjY4N30.SKvkVYEUsnuKUCeNfrwsdAVn9TeG-RcY2rpeCZ4vJdE"
 
 ### Get Profile
 GET http://localhost:3000/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvb25jaGF2ZXpAZ21haWwuY29tIiwic3ViIjoyLCJpYXQiOjE3MzY4MDc0MzEsImV4cCI6MTczNjg5MzgzMX0.DUR5EHDE30jlaiHfyUIhsyiTbI7o3ybyoodOsl-WADM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IlJpY2hAdmFnb3MuY29tIiwidXNlcklkIjo0LCJpYXQiOjE3MzY4MTAzMDksImV4cCI6MTczNjg5NjcwOX0.3PwZ29NKxybodpFfi7bXW3tmY1zZbRU9-LtchJYDNII
