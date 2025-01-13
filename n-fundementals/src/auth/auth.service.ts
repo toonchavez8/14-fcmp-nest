@@ -26,6 +26,7 @@ export class AuthService {
 			const payload: PayloadType = { email: user.email, userId: user.id };
 
 			const artist = await this.artistsService.findArtist(user.id);
+			console.log('artist', artist);
 			if (artist) {
 				payload.artistId = artist.id;
 			}
